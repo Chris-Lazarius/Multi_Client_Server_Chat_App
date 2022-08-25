@@ -19,7 +19,7 @@ import java.net.*;
             String sMsg1 = "", sMsg2 = "";
             while(!sMsg1.equals("stop"))
             {
-                sMsg1 = din.readUTF
+                sMsg1 = din.readUTF();
             }
 
             
