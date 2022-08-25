@@ -1,24 +1,30 @@
 package ClientSide;
 
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.net.Socket;
-import java.net.UnknownHostException;
+import java.io.*;
+import java.net.*;
+
 
 public class MultiClient {
     
     public static void main(String[] args) {
-        
+        String sMsg1 = "", sMsg2 = "";
         try {
-            Socket socket = new Socket("127.0.0.1", 8888);
-            DataOutputStream dout = new DataOutputStream(socket.getOutputStream());
-            DataInputStream in = new DataInputStream(socket.getInputStream());
-            dout.writeUTF("Hello Server");
-            dout.flush();
+            Socket sc = new Socket("127.0.0.1", 8888);
+            DataInputStream din = new DataInputStream(sc.getInputStream());
+            DataOutputStream dout = new DataOutputStream(sc.getOutputStream());
+            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+            while(!sMsg1.equals("stop"))
+            {
+                sMsg1 = br.readLine();
+                dout.writeUTF(sMsg1);
+                dout.flush();
+                sMsg2 = din.readUTF();
+                System.out.println("server say: " + sMsg2);
+            }
+            sc.close();
             dout.close();
-            socket.close();
         } catch (UnknownHostException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
