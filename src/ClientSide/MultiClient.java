@@ -17,6 +17,7 @@ public class MultiClient {
 
             while(!sMsg1.equals("stop"))
             {
+                System.out.println("Client: ");
                 sMsg1 = br.readLine();
                 dout.writeUTF(sMsg1);
                 dout.flush();
